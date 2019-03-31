@@ -1,169 +1,173 @@
-html {
-  position: relative;
-  min-height: 100%;
-}
+/* Space out content a bit */
 
 body {
-  margin-bottom: 80px;
-  background-image: url("../images/paper.png");
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
-.card a:not([href]):not([tabindex]).scrape-new {
-  color: #2196F3;
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+
+.header,
+.marketing,
+.footer {
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
+
+
+/* Custom page header */
+
+.header {
+  padding-bottom: 1rem;
+  border-bottom: .05rem solid #e5e5e5;
+}
+
+
+/* Make the masthead heading the same height as the navigation */
+
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 3rem;
+}
+
+
+/* Custom page footer */
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 80px;
-  color: white;
-  background-color: #2196f3;
+  padding-top: 1.5rem;
+  color: #777;
+  border-top: .05rem solid #e5e5e5;
 }
 
-.navbar {
-  margin-bottom: 0;
+
+/* Customize container */
+
+@media (min-width: 48em) {
+  .container {
+    max-width: 73rem;
+  }
+}
+
+.container-narrow>hr {
+  margin: 2rem 0;
+}
+
+h4.card-header {
+  font-family: Camphor, Open Sans, Segoe UI, sans-serif;
+  color: #5E5E5F;
+}
+
+p.card-text {
+  font-family: Camphor, Open Sans, Segoe UI, sans-serif;
+  color: #6b7c93;
+}
+
+a.btn.btn-primary:hover {
+  color: #fff;
+  transform: translateY(-4px);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+}
+
+a.btn.btn-primary--default {
+  color: #fff;
+  background: #6772e5;
+}
+
+
+/* Main marketing message and sign up button */
+
+h1.display-3 {
+  font-family: Camphor, Open Sans, Segoe UI, sans-serif;
+  color: #32325d;
 }
 
 .jumbotron {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  padding: 0;
-  font-family: "Cormorant SC";
-  box-shadow: 10px 5px 20px 2px lightslategrey;
-}
-
-.jumbotron .overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: auto;
-  background: linear-gradient(#333, black);
-  opacity: 0.7;
-}
-
-.jumbotron .background-image {
-  height: 100%;
-  background-image: url("../images/newspaper.jpg");
-  background-size: cover;
-}
-
-.jumbotron .caption {
-  position: absolute;
-  top: 30%;
-  width: 100%;
   text-align: center;
+  border-bottom: .05rem solid #e5e5e5;
+  /*background: linear-gradient( rgba(20, 20, 20, .5), rgba(20, 20, 20, 0.4)), url("/img/burning.jpg");*/
+  /*background-size: cover;*/
 }
 
-.jumbotron .caption h1,
-.jumbotron .caption p {
-  color: white;
+div.jumbotron {
+  background: rgba(236, 240, 245, 0.68);
 }
 
-.jumbotron h1 {
-  font-size: 80px;
-  font-weight: 800;
+a.btn.btn-lg.btn-success {
+  color: #7795f8;
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
 }
 
-.jumbotron p {
-  font-size: 30px;
+a.btn.btn-lg.btn-success {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 14px;
+  background: #fff;
+  border-radius: 4px;
+  border-color: ivory;
+  font-family: Camphor, Open Sans, Segoe UI, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .025em;
+  color: #6772e5;
+  text-decoration: none;
+  transition: all .15s ease;
 }
 
-.article-container {
-  padding-bottom: 25px;
+a.nav-link.active,
+.nav-pills .nav-link.active {
+  color: #fff;
+  background-color: #43458b;
 }
 
-.card {
-  border-radius: 0;
-  box-shadow: 3px 3px 20px lightslategrey;
-  margin: 20px 0;
+
 }
 
-.card .card-header {
-  background-color: #2196f3;
-  position: relative;
-  padding-top: 30px;
-  padding-bottom: 30px;
+}
+.jumboheader {
+  color: #3274ff
+}
+.jumbotron .btn {
+  padding: .75rem 1.5rem;
+  font-size: 1.5rem;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #6772e5;
+  border-color: #6772e5;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #7795f8;
+  border-color: #7795f8;
 }
 
-.card .card-header h3 {
-  color: white;
+/* Supporting marketing content */
+.marketing {
+  margin: 3rem 0;
+}
+.marketing p+h4 {
+  margin-top: 1.5rem;
 }
 
-.card .card-header .btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-
-.card .card-header .btn.delete {
-  right: 160px;
-}
-
-.card .card-body {
-  font-size: 16px;
-}
-
-.card .card-header .article-link {
-  color: white;
-  display: inline-block;
-  width: 80%;
-}
-
-.footer > .container > p {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 5px;
-  padding-bottom: 5px;
-  padding-left: 10px;
-  margin: 0;
-  font-weight: 800;
-  background: #0c7cd5;
-}
-
-.navbar-nav > li > a.scrape-new,
-.navbar-nav > li > a.clear {
-  padding: 10px;
-  margin-top: 10px;
-  margin-left: 10px;
-  font-weight: 800;
-  color: white;
-}
-
-.navbar-nav > li > a.scrape-new:hover,
-.navbar-nav > li > a.clear:hover {
-  background: #4caf50;
-}
-
-.navbar-nav > li > a.scrape-new:active {
-  background: #e51c23;
-}
-
-.scrape-new {
-  cursor: pointer;
-}
-
-.m-top-80 {
-  margin-top: 80px;
-}
-
-textarea {
-  padding: 10px;
-  resize: none;
-  width: 100%;
-}
-
-.bootbox-body .btn {
-  float: right;
-  margin: 5px;
-}
-
-.note.list-group-item .btn {
-  position: relative;
-  bottom: 10px;
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 48em) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 2rem;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
 }
