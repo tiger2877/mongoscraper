@@ -38,7 +38,8 @@
 
     <div class="container-fluid article-container">
         {{!--News Cards--}} {{!--Iterate through the results and populate the handlebars injection points with the scraped titles,
-        links, and article snippets.--}} {{#each result}}
+        links, and article snippets.--}} 
+        {{#each result}}
         <div class="card news-section">
             <a href="{{this.link}}">
                 <h3 class="card-header">{{this.title}}</h3>
@@ -56,6 +57,29 @@
         </div>
         <br>
         <br> {{/each}}
+
+    <div class='alert alert-warning text-center'>
+        <h4>Uh Oh. Looks like we don't have any new articles.</h4>
+    </div>
+
+    <div class="card">
+        <div class="card-header text-center">
+            <h5>What Would You Like To Do?</h5>
+        </div>
+        <div class="card-body text-center">
+            <a class="scrape-new" href="/scrape">Try Scraping New Articles</a><br>
+            <a href="/saved">Go to Saved Articles</a>
+        </h3>
+        </div>
+    </div>
+    </div>
+
+<footer class="footer">
+  <div class="container">
+    <p>New York Times Mongo Scraper</p>
+  </div>
+</footer>
+
     </div>
 </div>
 <!-- /container -->
