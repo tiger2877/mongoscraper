@@ -100,18 +100,13 @@ app.get("/articles", function (req, res) {
   // Create a new comment
   app.post("/articles/:id", function (req, res) {
     // Create a new Comment and pass the req.body to the entry
-    Comment
-      .create(req.body, function (error, doc) {
+    Comment.create(req.body, function (error, doc) {
         if (error) {
           console.log(error);
         } else {
           // Use the article id to find and update it's comment
-          Article.findOneAndUpdate({
-            "_id": req.params.id
-          }, {
-            $push: {
-              "comment": doc._id
-            }
+          Article.findOneAndUpdate({"_id": req.params.id}, {
+            $push: {"comment": doc._id}
           }, {
             safe: true,
             upsert: true,
@@ -133,19 +128,14 @@ app.get("/articles", function (req, res) {
 
   // Delete a comment
   app.delete("/articles/:id/:commentid", function (req, res) {
-    Comment
-      .findByIdAndRemove(req.params.commentid, function (error, doc) {
+    Comment.findByIdAndRemove({"_id": req.params.commentid}, function(error, doc) {
         // Log any errors
         if (error) {
           console.log(error);
         } else {
           console.log(doc);
-          Article.findOneAndUpdate({
-            "_id": req.params.id
-          }, {
-            $pull: {
-              "comment": doc._id
-            }
+          Article.findOneAndUpdate({"_id": req.params.id}, {
+            $pull: {"comment": doc._id}
           })
           // Execute the above query
             .exec(function (err, doc) {
