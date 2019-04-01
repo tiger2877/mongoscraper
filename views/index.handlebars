@@ -44,6 +44,7 @@
             <a href="{{this.link}}">
                 <h3 class="card-header">{{this.title}}</h3>
             </a>
+    
             <div class="card-block">
                 {{!--
                 <h4 class="card-title"></h4>
@@ -53,6 +54,7 @@
                 {{!-- </a> --}}
                 <br>
                 <a href="/articles/{{this._id}}" class="btn btn-primary">Comment</a>
+                <a class="btn btn-danger clear" href="/articles/{{this._id}}">Save Article</a>
             </div>
         </div>
         <br>
@@ -68,7 +70,7 @@
         </div>
         <div class="card-body text-center">
             <a class="scrape-new" href="/scrape">Try Scraping New Articles</a><br>
-            <a href="/saved">Go to Saved Articles</a>
+            <a href="/save">Go to Saved Articles</a>
         </h3>
         </div>
     </div>
