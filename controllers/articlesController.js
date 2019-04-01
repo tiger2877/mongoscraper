@@ -60,34 +60,6 @@ module.exports = function (app) {
   });
 });
 
-// GET '/save/:id' Saves article for later viewing
-app.put("/save/:id", function (req, res) {
-  //create a new saved Article in the db
-  Article.findByIdAndUpdate(req.params.articleID, { $set: {saved: true} }, { new: true })
-    .then(function(dbArticle) {
-      // View the added result in the console
-      res.send("Article updated");
-    })
-    .catch(function(err) {
-      // If an error occurred, log it
-      console.log(err);
-      res.redirect('/');
-    });
-});
-
-// GET '/save' Show all saved articles
-app.get("/save", function (req, res) {
-// Grab every document in the SavedArticles collection  
-Article.find({ saved: true })
-  .then(function(dbArticle) {
-      res.render("savedArticles", { articles: dbArticles, title: "These are your saved articles" });
-  })
-  .catch(function(err)  {
-      console.log(err);
-      res.redirect('/');
-  })
-});
-
 // This will get the articles we scraped from the mongoDB
 app.get("/articles", function (req, res) {
 // Grab every doc in the Articles array
@@ -130,10 +102,8 @@ app.get("/articles", function (req, res) {
     // Create a new Comment and pass the req.body to the entry
     Comment
       .create(req.body, function (error, doc) {
-        // Log any errors
         if (error) {
-          console.log(error// Otherwise
-          );
+          console.log(error);
         } else {
           // Use the article id to find and update it's comment
           Article.findOneAndUpdate({
@@ -167,8 +137,7 @@ app.get("/articles", function (req, res) {
       .findByIdAndRemove(req.params.commentid, function (error, doc) {
         // Log any errors
         if (error) {
-          console.log(error// Otherwise
-          );
+          console.log(error);
         } else {
           console.log(doc);
           Article.findOneAndUpdate({

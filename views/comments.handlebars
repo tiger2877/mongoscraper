@@ -20,15 +20,14 @@
     <h2><a href="{{result.link}}" target="_blank">{{result.title}}</a></h2>
     <p>{{result.summary}}</p>
   </div>
-  <div class="row">
+
     <h5>Comments So Far</h5>
-  </div>
-  {{!--If no comments exist then display the following ptag info--}}
-  <div class="row">
+     {{!--If no comments exist then display the following ptag info--}}
+  
     {{#unless result.comment}}
-    <p style="font-size: 12px">There are no comments just yet. Add yours below!</p>
+    <p>There are no comments just yet. Add yours below!</p>
     {{/unless}}
-  </div>
+
   {{!--Iterate through the comments by author and their message, display them, and have the option to delete them from the user view (also deletes from our db --}}
   <div class="row">
     <ul>
@@ -40,11 +39,10 @@
       </li>
       {{/each}}
     </ul>
-    
   </div>
-  <div class="row">
+
     <h5>Say Something About This Article</h5>
-  </div>
+
   {{!--Do a post method for the comment(s) a user adds and save it to the db--}}
   <form method="POST" action="/articles/{{result._id}}">
     <div class="form-group row">
@@ -57,4 +55,5 @@
     </div>
     <button class="btn btn-primary" type="submit">Submit</button>
   </form>
+
 </div>

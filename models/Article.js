@@ -35,13 +35,12 @@ var ArticleSchema = new Schema({
   // `comment` is an array that stores ObjectIds
   // The ref property links these ObjectIds to the Comment model
   // This allows us to populate the Article with any associated Comment
-  comment: {
-      // Store ObjectIds in the array
+  comment: [
+    {
       type: Schema.Types.ObjectId,
-      // The ObjectIds will refer to the ids in the Comment model
       ref: "Comment"
-  }
-
+    }
+  ]
 });
 
 // Create the Article model with the ArticleSchema
