@@ -6,7 +6,7 @@
                     <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/saved">Saved Articles</a>
+                    <a class="nav-link" href="/save">Saved Articles</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-danger scrape-new" href="/scrape">SCRAPE NEW ARTICLES!</a>
@@ -54,15 +54,18 @@
                 {{!-- </a> --}}
                 <br>
                 <a href="/articles/{{this._id}}" class="btn btn-primary">Comment</a>
-                <a class="btn btn-danger clear" href="/articles/{{this._id}}">Save Article</a>
+                {{!-- <button id="saveArticle" class="btn btn-danger clear">Save Article</button> --}}
             </div>
         </div>
         <br>
-        <br> {{/each}}
+        <br> 
 
-    <div class='alert alert-warning text-center'>
-        <h4>Uh Oh. Looks like we don't have any new articles.</h4>
-    </div>
+        {{else}}
+        <div class='alert alert-warning text-center'>
+            <h4>Uh Oh. Looks like we don't have any new articles.</h4>
+        </div>
+
+    {{/each}}
 
     <div class="card">
         <div class="card-header text-center">
@@ -82,6 +85,68 @@
   </div>
 </footer>
 
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+<script>
+
+//start materialize JQuery
+   $(document).ready(function(){
+    $('#modal1').modal();
+    $('.materialboxed').materialbox();
+    $(".button-collapse").sideNav();
+
+//save button event handler
+    $(".save").on("click", function() {
+    var thisId = $(this).attr("data-id");
+    $.ajax({
+        method: "PUT",
+        url: "/save/" + thisId
+    }).done(function(data) {
+        window.location = "/save"
+    })
+});
+
+//delete saved articles
+    $(".delete").on("click", function(){
+      var thisId = $(this).attr("id");
+       $.ajax({
+        method: "DELETE",
+        url: "/delete/article/" + thisId
+    }).done(function(data) {
+        window.location = "/save"
+    })
+    });
+    
+//Handle Save Comment button
+$(".saveComment").on("click", function() {
+    var thisId = $(this).attr("data-id");
+    if (!$("#textarea1" + thisId).val()) {
+        alert("please enter a note to save")
+    }else {
+      $.ajax({
+            method: "POST",
+            url: "/comments/save/" + thisId,
+            data: {
+              text: $("#textarea1" + thisId).val()
+            }
+          }).done(function(data) {
+              // Log the response
+              console.log(data);
+              // Empty the notes section
+              $("#textarea1" + thisId).val("");
+              $(".#modal1").modal("hide");
+              window.location = "/save"
+          });
+    }
+});
+//delete comments
+    
+    });
+ </script>
+
     </div>
 </div>
 <!-- /container -->
+
+ <!-- Compiled and minified JavaScript -->

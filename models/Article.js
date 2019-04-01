@@ -25,14 +25,23 @@ var ArticleSchema = new Schema({
     required: true,
     // unique: true
   },
-  // This  saves an array of all the comments as a property of article schema, ref
-  // refers to the Comment model
-  comment: [
-    {
+  // saved is a boolean to identify if the article is saved
+  saved: {
+    type: Boolean,
+    default: false,
+    required: false,
+    // unique: true
+  },
+  // `comment` is an array that stores ObjectIds
+  // The ref property links these ObjectIds to the Comment model
+  // This allows us to populate the Article with any associated Comment
+  comment: {
+      // Store ObjectIds in the array
       type: Schema.Types.ObjectId,
+      // The ObjectIds will refer to the ids in the Comment model
       ref: "Comment"
-    }
-  ]
+  }
+
 });
 
 // Create the Article model with the ArticleSchema

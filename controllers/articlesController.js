@@ -60,11 +60,39 @@ module.exports = function (app) {
   });
 });
 
-  // This will get the articles we scraped from the mongoDB
-  app.get("/articles", function (req, res) {
-    // Grab every doc in the Articles array
-    Article
-      .find({}, function (error, doc) {
+// GET '/save/:id' Saves article for later viewing
+app.put("/save/:id", function (req, res) {
+  //create a new saved Article in the db
+  Article.findByIdAndUpdate(req.params.articleID, { $set: {saved: true} }, { new: true })
+    .then(function(dbArticle) {
+      // View the added result in the console
+      res.send("Article updated");
+    })
+    .catch(function(err) {
+      // If an error occurred, log it
+      console.log(err);
+      res.redirect('/');
+    });
+});
+
+// GET '/save' Show all saved articles
+app.get("/save", function (req, res) {
+// Grab every document in the SavedArticles collection  
+Article.find({ saved: true })
+  .then(function(dbArticle) {
+      res.render("savedArticles", { articles: dbArticles, title: "These are your saved articles" });
+  })
+  .catch(function(err)  {
+      console.log(err);
+      res.redirect('/');
+  })
+});
+
+// This will get the articles we scraped from the mongoDB
+app.get("/articles", function (req, res) {
+// Grab every doc in the Articles array
+  Article
+    .find({}, function (error, doc) {
         // Log any errors
         if (error) {
           console.log(error// Or send the doc to the browser as a json object
@@ -73,8 +101,8 @@ module.exports = function (app) {
           res.render("index", {result: doc});
         }
         //Will sort the articles by most recent (-1 = descending order)
-      })
-      .sort({'_id': -1});
+      })      
+    .sort({'_id': -1});
   });
 
   // Grab an article by it's ObjectId
@@ -133,6 +161,7 @@ module.exports = function (app) {
       });
   });
 
+  // Delete a comment
   app.delete("/articles/:id/:commentid", function (req, res) {
     Comment
       .findByIdAndRemove(req.params.commentid, function (error, doc) {

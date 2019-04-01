@@ -1,28 +1,32 @@
 <div class="container">
   <div class="header clearfix">
-    <nav>
-      <ul class="nav nav-pills float-right">
-        <li class="nav-item">
-          <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-        </li>
- 
-      </ul>
-    </nav>
-    <h3 class="text-muted">Mongo WebScraping</h3>
+    {{!--Display nav bar--}}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <ul class="nav nav-pills mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/save">Saved Articles</a>
+                </li>
+            </ul>
+        </nav>
+    {{!--End of nav bar--}}    
   </div>
-  <hr>
+  
+<div class="container-fluid article-container">
   {{!--Display the scraped titles, links, and article snippets in this section.--}}
   <div class="row">
-    <h1><a href="{{result.link}}" target="_blank">{{result.title}}</a></h1>
+    <h2><a href="{{result.link}}" target="_blank">{{result.title}}</a></h2>
     <p>{{result.summary}}</p>
   </div>
   <div class="row">
-    <h2>Comments So Far</h2>
+    <h5>Comments So Far</h5>
   </div>
   {{!--If no comments exist then display the following ptag info--}}
   <div class="row">
     {{#unless result.comment}}
-    <p>There are no comments just yet. Add yours below!</p>
+    <p style="font-size: 12px">There are no comments just yet. Add yours below!</p>
     {{/unless}}
   </div>
   {{!--Iterate through the comments by author and their message, display them, and have the option to delete them from the user view (also deletes from our db --}}
@@ -39,7 +43,7 @@
     
   </div>
   <div class="row">
-    <h2>Say Something About This Article</h2>
+    <h5>Say Something About This Article</h5>
   </div>
   {{!--Do a post method for the comment(s) a user adds and save it to the db--}}
   <form method="POST" action="/articles/{{result._id}}">
@@ -53,9 +57,4 @@
     </div>
     <button class="btn btn-primary" type="submit">Submit</button>
   </form>
-  <br>
-  <br>
-  <br>
-  <br>
-
 </div>
