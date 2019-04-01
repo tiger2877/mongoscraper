@@ -128,7 +128,7 @@ app.get("/articles", function (req, res) {
 
   // Delete a comment
   app.delete("/articles/:id/:commentid", function (req, res) {
-    Comment.findByIdAndRemove({"_id": req.params.commentid}, function(error, doc) {
+    Comment.findByIdAndRemove(req.params.commentid, function(error, doc) {
         // Log any errors
         if (error) {
           console.log(error);
