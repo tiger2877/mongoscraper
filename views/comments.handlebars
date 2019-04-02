@@ -26,7 +26,7 @@
     <br>
     <hr>
     <h5>Comments So Far:</h5>
-
+    <br>
   {{!--If no comments exist then display the following ptag info--}}
 
     {{#unless result.comment}}
@@ -39,7 +39,7 @@
       {{#each result.comment}}
       <li style="list-style: none">
         <p>Name: {{this.name}} </p>
-        <p>Message: {{this.body}}</p>
+        <p>Comments: {{this.body}}</p>
         <button class="delete-button btn btn-danger" data-id="{{this._id}}">Delete</button>
       </li>
       {{/each}}
@@ -51,11 +51,11 @@
     {{!--Do a post method for the comment(s) a user adds and save it to the db--}}
     <form method="POST" action="/articles/{{result._id}}">
       <div class="form-group">
-        <label for="name" class="col-form-label">Name</label>
+        <label for="name" class="col-form-label">Name:</label>
         <input class="form-control" type="text" name="name" id="name" required>
       </div>
       <div class="form-group">
-        <label for="body">Message</label>
+        <label for="body">Comments:</label>
         <textarea class="form-control" id="body" name="body" rows="3" required></textarea>
       </div>
       <button class="btn btn-primary" type="submit">Submit</button>
