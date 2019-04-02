@@ -5,9 +5,6 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
-// Using es6 js promise
-mongoose.Promise = Promise;
-
 // Initialize Express
 var app = express();
 var PORT = process.env.PORT || 8080;
@@ -24,8 +21,14 @@ app.set('view engine', 'handlebars');
 // Make public a static dir to serve our static files
 app.use(express.static("public"));
 
-// Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/mongoScraper", { useNewUrlParser: true });
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoScraper";
+
+// // Connect to the Mongo DB
+// mongoose.connect("mongodb://localhost/mongoScraper", { useNewUrlParser: true });
+// Using es6 js promise
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 var db = mongoose.connection;
 
