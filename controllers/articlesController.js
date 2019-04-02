@@ -64,11 +64,10 @@ module.exports = function (app) {
 app.get("/articles", function (req, res) {
 // Grab every doc in the Articles array
   Article
-    .find({}, function (error, doc) {
+    .find({}, function (err, doc) {
         // Log any errors
-        if (error) {
-          console.log(error// Or send the doc to the browser as a json object
-          );
+        if (err) {
+          console.log(err);
         } else {
           res.render("index", {result: doc});
         }
@@ -85,11 +84,10 @@ app.get("/articles", function (req, res) {
     // ..and populate all of the comments associated with it
       .populate("comment")
     // now, execute our query
-      .exec(function (error, doc) {
+      .exec(function (err, doc) {
         // Log any errors
-        if (error) {
-          console.log(error// Otherwise, send the doc to the browser as a json object
-          );
+        if (err) {
+          console.log(err);
         } else {
           res.render("comments", {result: doc});
           // res.json (doc);
@@ -100,9 +98,9 @@ app.get("/articles", function (req, res) {
   // Create a new comment
   app.post("/articles/:id", function (req, res) {
     // Create a new Comment and pass the req.body to the entry
-    Comment.create(req.body, function (error, doc) {
-        if (error) {
-          console.log(error);
+    Comment.create(req.body, function (err, doc) {
+        if (err) {
+          console.log(err);
         } else {
           // Use the article id to find and update it's comment
           Article.findOneAndUpdate({"_id": req.params.id}, {
@@ -128,34 +126,38 @@ app.get("/articles", function (req, res) {
 
   // Delete a comment
   app.delete("/articles/:id/:commentid", function (req, res) {
-    Comment.findByIdAndRemove(req.params.commentid, function(error, doc) {
-        // Log any errors
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(doc);
-          Article.findOneAndUpdate({"_id": req.params.id}, {
-            $pull: {"comment": doc._id}
-          })
-          // Execute the above query
-            .exec(function (err, doc) {
-              // Log any errors
-              if (err) {
-                console.log(err);
-              }
-            });
-        }
-      });
+    Comment.findByIdAndRemove(req.params.commentid, function (err, doc) {
+      // Log any errors
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(doc);
+        Article.findOneAndUpdate({
+          "_id": req.params.id
+        }, {
+          $pull: {
+            "comment": doc._id
+          }
+        })
+        // Execute the above query
+          .exec(function (err, doc) {
+            // Log any errors
+            if (err) {
+              console.log(err);
+            }
+          });
+      }
   });
+});
 
  // Clear the DB
 app.get("/clearall", function(req, res) {
   // Remove every note from the notes collection
-  Article.remove({}, function(error, response) {
+  Article.remove({}, function(err, res) {
     // Log any errors to the console
-    if (error) {
-      console.log(error);
-      res.send(error);
+    if (err) {
+      console.log(err);
+      res.send(err);
     }
     else {
       // Otherwise, send the mongojs response to the browser
