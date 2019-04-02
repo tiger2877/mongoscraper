@@ -1,4 +1,4 @@
-// Require mongoose orm
+// Require mongoose
 var mongoose = require("mongoose");
 // Create Schema object constructor
 var Schema = mongoose.Schema;
@@ -11,26 +11,25 @@ var ArticleSchema = new Schema({
   title: {
     type: String,
     required: true,
-    // unique: true
+    unique: true,
   },
   // link is a required string and also unique to prevent duplicates
   link: {
     type: String,
     required: true,
-    // unique: true
+    unique: true,
   },
   // summary is a required string and also unique to prevent duplicates
   summary: {
     type: String,
     required: true,
-    // unique: true
+    unique: true,
   },
   // saved is a boolean to identify if the article is saved
   saved: {
     type: Boolean,
     default: false,
     required: false,
-    // unique: true
   },
   // `comment` is an array that stores ObjectIds
   // The ref property links these ObjectIds to the Comment model

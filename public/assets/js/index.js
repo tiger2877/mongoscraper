@@ -1,18 +1,42 @@
-// When user clicks the delete button for a note
-$(document).on("click", ".delete", function() {
-  // Save the p tag that encloses the button
-  var selected = $(this).parent();
-  // Make an AJAX GET request to delete the specific note
-  // this uses the data-id of the p-tag, which is linked to the specific note
-  $.ajax({
-    type: "GET",
-    url: "/delete/" + selected.attr("data-id"),
+$(document).ready(function() {
 
-    // On successful call
-    success: function(response) {
-      // Remove the p-tag from the DOM
-      selected.remove();
+  $(document).on("click", ".btn.delete", handleArticleDelete);
 
-    }
-  });
+  function handleArticleDelete() {
+    // This function handles deleting articles/headlines
+    // We grab the id of the article to delete from the card element the delete button sits inside
+    var articleToDelete = $(this)
+      .parents(".card")
+      .data();
+
+    // Remove card from page
+    $(this)
+      .parents(".card")
+      .remove();
+    // Using a delete method here just to be semantic since we are deleting an article/headline
+    $.ajax({
+      method: "DELETE",
+      url: "/Article/" + articleToDelete._id
+    }).then(function(data) {
+      // If this works out, run initPage again which will re-render our list of saved articles
+      if (data.ok) {
+        initPage();
+      }
+    });
+  }
+
+  function initPage() {
+    // Empty the article container, run an AJAX request for any saved headlines
+    $.get("Article?saved=true").then(function(data) {
+      articleContainer.empty();
+      // If we have headlines, render them to the page
+      if (data && data.length) {
+        renderArticles(data);
+      } else {
+        // Otherwise render a message explaining we have no articles
+        renderEmpty();
+      }
+    });
+  }
+
 });
