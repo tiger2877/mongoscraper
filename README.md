@@ -3,6 +3,7 @@
 ### Overview
 
 In this project, you'll create a web app that lets users view and leave comments on the latest news. But you're not going to actually write any articles; instead, you'll flex your Mongoose and Cheerio muscles to scrape news from another site.
+
 See the deployed demo application [here](https://apple-custard-97439.herokuapp.com/articles).
 
 ### Prerequisites
